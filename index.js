@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     Walmart Login title mod
+// @name     Login Title Mod
 // @version  1
 // @grant    none
 // ==/UserScript==
