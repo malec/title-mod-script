@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     Login Title Mod
+// @name     Login Title mod
 // @version  1
 // @grant    none
 // ==/UserScript==
@@ -46,7 +46,7 @@ function extractRootDomain(url) {
 
 var titleElement = document.querySelector("title");
 
-function setTitleElement(text) {
+function appendTitleElementText(text) {
   titleElement.innerHTML = titleElement.innerHTML + " " + text;
 }
 
@@ -59,15 +59,14 @@ if(URL.includes("login.microsoftonline.com")) {
     () => {
       let ssoNameLabel = document.getElementById("displayName");
       if(ssoNameLabel)
-      	textToInsert = ssoNameLabel.innerHTML + " password only";
+      	appendTitleElementText(ssoNameLabel.innerHTML + " password only ");
       else
-        textToInsert = "username and password";
-      setTitleElement(textToInsert);
+        textToInsert = "username and password ";
+      appendTitleElementText(textToInsert);
     },
     	10
   );
 } else {
-  textToInsert = textToInsert + " " + domain;
+  appendTitleElementText(domain);
 }
-setTitleElement(textToInsert);
 textToInsert = "";
