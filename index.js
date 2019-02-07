@@ -44,7 +44,30 @@ function extractRootDomain(url) {
     return domain;
 }
 
+var titleElement = document.querySelector("title");
+
+function setTitleElement(text) {
+  titleElement.innerHTML = titleElement.innerHTML + " " + text;
+}
+
 var URL = window.location.href;
 var domain = extractRootDomain(URL);
-var titleElement = document.querySelector("title");
-titleElement.innerHTML = domain + " " + titleElement;
+var textToInsert = "";
+if(URL.includes("login.microsoftonline.com")) {
+  // find username "*@uark.edu" or "*@microsoft.com"
+  setTimeout(
+    () => {
+      let ssoNameLabel = document.getElementById("displayName");
+      if(ssoNameLabel)
+      	textToInsert = ssoNameLabel.innerHTML + " password only";
+      else
+        textToInsert = "username and password";
+      setTitleElement(textToInsert);
+    },
+    	10
+  );
+} else {
+  textToInsert = textToInsert + " " + domain;
+}
+setTitleElement(textToInsert);
+textToInsert = "";
